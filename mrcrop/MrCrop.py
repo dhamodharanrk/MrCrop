@@ -378,7 +378,7 @@ def cli():
     if args.input == args.output:
         args.output = None
     print('Processing images in folder:', args.input)
-    main(args.input, args.output, args.reject,args.fail ,args.height, args.width, args.facePercent, args.padUp, args.padDown, args.padLeft, args.padRight)
+    main(args.input, args.output, args.reject,args.unknown ,args.height, args.width, args.facePercent, args.padUp, args.padDown, args.padLeft, args.padRight)
 
 # if __name__ == '__main__':
 #     cli()
