@@ -21,37 +21,30 @@ about = {}
 with open(os.path.join(HERE, NAME, "__version__.py")) as f:
     exec(f.read(), about)
 
-
 class UploadCommand(Command):
+
     description = "Build and publish the package."
     user_options = []
-
     @staticmethod
     def status(s):
         print("\033[1m{0}\033[0m".format(s))
 
     def initialize_options(self):
         pass
-
     def finalize_options(self):
         pass
-
     def run(self):
         try:
             self.status("Removing previous builds…")
             rmtree(os.path.join(HERE, "dist"))
         except OSError:
             pass
-
         self.status("Building Source and Wheel (universal) distribution…")
         setup_str = "{0} setup.py sdist bdist_wheel --universal"
         os.system(setup_str.format(sys.executable))
-
         self.status("Uploading the package to PyPi via Twine…")
         os.system("twine upload dist/*")
-
         sys.exit()
-
 setup(
     name=NAME,
     version=about["__version__"],
@@ -62,8 +55,8 @@ setup(
     url=URL,
     packages=find_packages(exclude=("tests",)),
     # If your package is a single module, use this instead of 'packages':
-    py_modules=['MrCrop'],
-    # entry_points={"console_scripts": ["MrCrop=MrCrop:cli"]},
+    # py_modules=['mypackage'],
+    entry_points={"console_scripts": ["mrcrop=mrcrop:cli"]},
     install_requires=REQUIRED,
     include_package_data=True,
     license="BSD 2-Clause",
